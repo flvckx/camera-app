@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		C6FE716F28A7924B00F349E5 /* CameraAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE716E28A7924B00F349E5 /* CameraAppApp.swift */; };
-		C6FE717128A7924B00F349E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE717028A7924B00F349E5 /* ContentView.swift */; };
 		C6FE717328A7924D00F349E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FE717228A7924D00F349E5 /* Assets.xcassets */; };
 		C6FE717628A7924D00F349E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FE717528A7924D00F349E5 /* Preview Assets.xcassets */; };
+		C6FE718028A795B100F349E5 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE717F28A795B100F349E5 /* FirstView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C6FE716B28A7924B00F349E5 /* CameraApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FE716E28A7924B00F349E5 /* CameraAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraAppApp.swift; sourceTree = "<group>"; };
-		C6FE717028A7924B00F349E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C6FE717228A7924D00F349E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6FE717528A7924D00F349E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C6FE717F28A795B100F349E5 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +78,17 @@
 		C6FE717D28A794AD00F349E5 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				C6FE717028A7924B00F349E5 /* ContentView.swift */,
+				C6FE717E28A7957100F349E5 /* FirstView */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C6FE717E28A7957100F349E5 /* FirstView */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE717F28A795B100F349E5 /* FirstView.swift */,
+			);
+			path = FirstView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6FE717128A7924B00F349E5 /* ContentView.swift in Sources */,
+				C6FE718028A795B100F349E5 /* FirstView.swift in Sources */,
 				C6FE716F28A7924B00F349E5 /* CameraAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
