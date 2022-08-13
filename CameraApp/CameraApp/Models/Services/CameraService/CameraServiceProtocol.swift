@@ -8,10 +8,9 @@
 import AVFoundation
 
 protocol CameraServiceProtocol: NSObjectProtocol {
-    init(
-        outputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?,
-        photoCaptureDelegate: AVCapturePhotoCaptureDelegate?
-    )
+    var error: Published<CameraServiceError?>.Publisher { get }
+    var outputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate? { get set }
+    var photoCaptureDelegate: AVCapturePhotoCaptureDelegate? { get set }
 
     func start() async
     func stop()

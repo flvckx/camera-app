@@ -36,7 +36,7 @@ struct FirstView: View {
                     isShowingCameraView = true
                 } label: {
                     NavigationLink(
-                        destination: EmptyView(),
+                        destination: CameraView(),
                         isActive: $isShowingCameraView
                     ) { Text("Enter") }
                         .frame(width: 250, height: 40)

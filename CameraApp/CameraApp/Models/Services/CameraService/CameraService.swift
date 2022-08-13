@@ -32,20 +32,14 @@ final class CameraService: NSObject, CameraServiceProtocol {
 
     private var isCaptureSessionConfigured = false
 
-    @Published var error: CameraServiceError?
+    @Published var publishedError: CameraServiceError?
 
-    private weak var outputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
-    private weak var photoCaptureDelegate: AVCapturePhotoCaptureDelegate?
+    var error: Published<CameraServiceError?>.Publisher { $publishedError }
+
+    weak var outputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?
+    weak var photoCaptureDelegate: AVCapturePhotoCaptureDelegate?
 
     let videoOutputQueue = DispatchQueue(label: "camera-app.camera-video-output-queue")
-
-    init(
-        outputSampleBufferDelegate: AVCaptureVideoDataOutputSampleBufferDelegate?,
-        photoCaptureDelegate: AVCapturePhotoCaptureDelegate?
-    ) {
-        self.outputSampleBufferDelegate = outputSampleBufferDelegate
-        self.photoCaptureDelegate = photoCaptureDelegate
-    }
 
     func start() async {
         guard await checkAuthorization() else { return }
@@ -121,13 +115,13 @@ final class CameraService: NSObject, CameraServiceProtocol {
 
             return status
         case .denied:
-            error = .deniedAuthorization
+            publishedError = .deniedAuthorization
             return false
         case .restricted:
-            error = .restrictedAuthorization
+            publishedError = .restrictedAuthorization
             return false
         @unknown default:
-            error = .unknownAuthorization
+            publishedError = .unknownAuthorization
             return false
         }
     }
@@ -145,7 +139,7 @@ final class CameraService: NSObject, CameraServiceProtocol {
         guard
             let captureDevice = captureDevice,
             let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) else {
-                error = .cannotAddInput
+                publishedError = .cannotAddInput
                 return
             }
 
@@ -156,16 +150,16 @@ final class CameraService: NSObject, CameraServiceProtocol {
         videoOutput.setSampleBufferDelegate(outputSampleBufferDelegate, queue: videoOutputQueue)
 
         guard captureSession.canAddInput(deviceInput) else {
-            error = .cannotAddInput
+            publishedError = .cannotAddInput
             return
         }
 
         guard captureSession.canAddOutput(photoOutput) else {
-            error = .cannotAddPhotoOutput
+            publishedError = .cannotAddPhotoOutput
             return
         }
         guard captureSession.canAddOutput(videoOutput) else {
-            error = .cannotAddVideoOutput
+            publishedError = .cannotAddVideoOutput
             return
         }
 
@@ -180,11 +174,12 @@ final class CameraService: NSObject, CameraServiceProtocol {
         photoOutput.isHighResolutionCaptureEnabled = true
         photoOutput.maxPhotoQualityPrioritization = .quality
 
-        if
-            let videoConnection = videoOutput.connection(with: .video),
-            videoConnection.isVideoMirroringSupported
-        {
-            videoConnection.isVideoMirrored = true
+        if let videoConnection = videoOutput.connection(with: .video) {
+            videoConnection.videoOrientation = .portrait
+
+            if videoConnection.isVideoMirroringSupported {
+                videoConnection.isVideoMirrored = true
+            }
         }
 
         isCaptureSessionConfigured = true
