@@ -11,6 +11,9 @@
 		C6FE717328A7924D00F349E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FE717228A7924D00F349E5 /* Assets.xcassets */; };
 		C6FE717628A7924D00F349E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FE717528A7924D00F349E5 /* Preview Assets.xcassets */; };
 		C6FE718028A795B100F349E5 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE717F28A795B100F349E5 /* FirstView.swift */; };
+		C6FE718728A7AA1900F349E5 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE718628A7AA1900F349E5 /* CameraService.swift */; };
+		C6FE718A28A7AED000F349E5 /* CameraServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE718928A7AED000F349E5 /* CameraServiceError.swift */; };
+		C6FE718C28A7B99300F349E5 /* CameraServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE718B28A7B99300F349E5 /* CameraServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		C6FE717228A7924D00F349E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6FE717528A7924D00F349E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C6FE717F28A795B100F349E5 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		C6FE718628A7AA1900F349E5 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		C6FE718928A7AED000F349E5 /* CameraServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraServiceError.swift; sourceTree = "<group>"; };
+		C6FE718B28A7B99300F349E5 /* CameraServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				C6FE716E28A7924B00F349E5 /* CameraAppApp.swift */,
+				C6FE718428A7A9F000F349E5 /* Models */,
 				C6FE717D28A794AD00F349E5 /* Scenes */,
 				C6FE717C28A7947A00F349E5 /* Resources */,
 			);
@@ -89,6 +96,32 @@
 				C6FE717F28A795B100F349E5 /* FirstView.swift */,
 			);
 			path = FirstView;
+			sourceTree = "<group>";
+		};
+		C6FE718428A7A9F000F349E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE718528A7A9F900F349E5 /* Services */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C6FE718528A7A9F900F349E5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE718828A7AEBD00F349E5 /* CameraService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C6FE718828A7AEBD00F349E5 /* CameraService */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE718628A7AA1900F349E5 /* CameraService.swift */,
+				C6FE718928A7AED000F349E5 /* CameraServiceError.swift */,
+				C6FE718B28A7B99300F349E5 /* CameraServiceProtocol.swift */,
+			);
+			path = CameraService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,8 +194,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6FE718C28A7B99300F349E5 /* CameraServiceProtocol.swift in Sources */,
 				C6FE718028A795B100F349E5 /* FirstView.swift in Sources */,
 				C6FE716F28A7924B00F349E5 /* CameraAppApp.swift in Sources */,
+				C6FE718728A7AA1900F349E5 /* CameraService.swift in Sources */,
+				C6FE718A28A7AED000F349E5 /* CameraServiceError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +330,7 @@
 				DEVELOPMENT_TEAM = TF2QHL8V3B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CameraApp uses front camera to capture images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -323,6 +360,7 @@
 				DEVELOPMENT_TEAM = TF2QHL8V3B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CameraApp uses front camera to capture images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
