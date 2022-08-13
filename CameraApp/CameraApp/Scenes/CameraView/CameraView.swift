@@ -15,9 +15,7 @@ struct CameraView: View {
         CameraContentView(image: viewModel.previewImage)
             .edgesIgnoringSafeArea(.all)
             .navigationBarBackButtonHidden(true)
-            .onAppear { viewModel.start() }
             .onBackSwipe { dismiss() }
-            .onDisappear { viewModel.stopFrames() }
             .environmentObject(viewModel)
     }
 }
