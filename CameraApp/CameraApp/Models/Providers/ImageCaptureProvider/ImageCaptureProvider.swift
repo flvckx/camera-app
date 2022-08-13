@@ -7,6 +7,7 @@
 
 import AVFoundation
 import CoreImage
+import SwiftUI
 
 final class ImageCaptureProvider: NSObject, ObservableObject {
     private var addToPhotoStream: ((AVCapturePhoto) -> Void)?
@@ -20,10 +21,21 @@ final class ImageCaptureProvider: NSObject, ObservableObject {
 
     lazy var previewStream: AsyncStream<CIImage> = {
         AsyncStream { continuation in
-            addToPreviewStream = { ciImage in
+            addToPreviewStream = { [weak self] ciImage in
+                guard let self = self else { return }
                 if !self.isPreviewPaused {
                     continuation.yield(ciImage)
                 }
+            }
+        }
+    }()
+
+    lazy var photoStream: AsyncStream<PhotoData?> = {
+        AsyncStream { continuation in
+            addToPhotoStream = { [weak self] photo in
+                guard let self = self else { return }
+                let photoData = self.unpackPhoto(photo)
+                continuation.yield(photoData)
             }
         }
     }()
@@ -40,6 +52,37 @@ final class ImageCaptureProvider: NSObject, ObservableObject {
 
     func start() async {
         await cameraService.start()
+    }
+
+    func stop() {
+        cameraService.stop()
+    }
+
+    func takePhoto() {
+        cameraService.takePhoto()
+    }
+
+    private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
+        guard
+            let imageData = photo.fileDataRepresentation(),
+            let previewCGImage = photo.previewCGImageRepresentation(),
+            let metadataOrientation = photo.metadata[String(kCGImagePropertyOrientation)] as? UInt32,
+            let cgImageOrientation = CGImagePropertyOrientation(rawValue: metadataOrientation) else { return nil }
+
+        let imageOrientation = Image.Orientation(cgImageOrientation)
+        let thumbnailImage = Image(decorative: previewCGImage, scale: 1, orientation: imageOrientation)
+
+        let photoDimensions = photo.resolvedSettings.photoDimensions
+        let imageSize = (width: Int(photoDimensions.width), height: Int(photoDimensions.height))
+        let previewDimensions = photo.resolvedSettings.previewDimensions
+        let thumbnailSize = (width: Int(previewDimensions.width), height: Int(previewDimensions.height))
+
+        return PhotoData(
+            thumbnailImage: thumbnailImage,
+            thumbnailSize: thumbnailSize,
+            imageData: imageData,
+            imageSize: imageSize
+        )
     }
 }
 
@@ -65,5 +108,21 @@ extension ImageCaptureProvider: AVCapturePhotoCaptureDelegate {
         }
 
         addToPhotoStream?(photo)
+    }
+}
+
+// MARK: - Image.Orientation
+fileprivate extension Image.Orientation {
+    init(_ cgImageOrientation: CGImagePropertyOrientation) {
+        switch cgImageOrientation {
+        case .up: self = .up
+        case .upMirrored: self = .upMirrored
+        case .down: self = .down
+        case .downMirrored: self = .downMirrored
+        case .left: self = .left
+        case .leftMirrored: self = .leftMirrored
+        case .right: self = .right
+        case .rightMirrored: self = .rightMirrored
+        }
     }
 }

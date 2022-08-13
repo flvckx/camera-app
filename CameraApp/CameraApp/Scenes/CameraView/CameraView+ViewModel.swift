@@ -10,25 +10,36 @@ import SwiftUI
 extension CameraView {
     @MainActor class ViewModel: ObservableObject {
         @Published var previewImage: Image?
-        @Published var capturedPhoto: Image?
+        @Published var capturedPhoto: PhotoData?
 
-        private let imageCaptureProvider: ImageCaptureProvider
+        var imageCaptureProvider = ImageCaptureProvider()
 
-        init(imageCaptureProvider: ImageCaptureProvider = .init()) {
-            self.imageCaptureProvider = imageCaptureProvider
-
+        init() {
             Task {
                 await imageCaptureProvider.start()
+            }
+
+            Task {
                 await handleCameraPreviews()
+            }
+
+            Task {
+                await handleCameraPhotos()
             }
         }
 
         func start() {
+            Task {
+                await imageCaptureProvider.start()
+            }
+
             imageCaptureProvider.isPreviewPaused = false
         }
 
         func stopFrames() {
             imageCaptureProvider.isPreviewPaused = true
+            previewImage = nil
+            imageCaptureProvider.stop()
         }
 
         private func handleCameraPreviews() async {
@@ -38,6 +49,18 @@ extension CameraView {
             for await image in imageStream {
                 Task { @MainActor in
                     previewImage = image
+                }
+            }
+        }
+
+        private func handleCameraPhotos() async {
+            let unpackedPhotoStream = imageCaptureProvider.photoStream
+                .compactMap { $0 }
+
+            for await photoData in unpackedPhotoStream {
+                Task { @MainActor in
+                    previewImage = photoData.thumbnailImage
+                    capturedPhoto = photoData
                 }
             }
         }

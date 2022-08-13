@@ -93,11 +93,14 @@ final class CameraService: NSObject, CameraServiceProtocol {
             }
             photoSettings.photoQualityPrioritization = .balanced
 
-            if
-                let photoOutputVideoConnection = photoOutput.connection(with: .video),
-                photoOutputVideoConnection.isVideoOrientationSupported
-            {
-                photoOutputVideoConnection.videoOrientation = .portrait
+            if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
+                if photoOutputVideoConnection.isVideoOrientationSupported {
+                    photoOutputVideoConnection.videoOrientation = .portrait
+                }
+
+                if photoOutputVideoConnection.isVideoMirroringSupported {
+                    photoOutputVideoConnection.isVideoMirrored = true
+                }
             }
 
             photoOutput.capturePhoto(with: photoSettings, delegate: photoCaptureDelegate)

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CameraContentView: View {
     @EnvironmentObject private var viewModel: CameraView.ViewModel
+
     @State private var isShowingPreviewView = false
+    @State private var photo: PhotoData? = nil
 
     var image: Image?
 
@@ -20,7 +22,6 @@ struct CameraContentView: View {
             if let image = image {
                 GeometryReader { geometry in
                     image
-//                    Image(image, scale: 1.0, orientation: .upMirrored, label: label)
                         .resizable()
                         .scaledToFill()
                         .frame(
@@ -37,11 +38,10 @@ struct CameraContentView: View {
                 Spacer()
 
                 Button {
-                    // capture
-                    isShowingPreviewView = true
+                    viewModel.imageCaptureProvider.takePhoto()
                 } label: {
                     NavigationLink(
-                        destination: navigationDestination,
+                        destination: PreviewView(photoData: $photo),
                         isActive: $isShowingPreviewView
                     ) {
                         Image(systemName: "circle.inset.filled")
@@ -49,21 +49,21 @@ struct CameraContentView: View {
                             .frame(width: 65, height: 65)
                             .foregroundColor(.red)
                     }
-                    .disabled(viewModel.capturedPhoto == nil)
+                    .disabled(true)
                     .padding(.bottom, 100)
                 }
             }
         }
-    }
+        .onChange(of: photo) { newValue in
+            newValue == nil
+                ? viewModel.start()
+                : viewModel.stopFrames()
+        }
+        .onReceive(viewModel.$capturedPhoto) { capturedPhoto in
+            guard let capturedPhoto = capturedPhoto else { return }
 
-    private var navigationDestination: some View {
-        Group {
-            if let photo = viewModel.capturedPhoto {
-                EmptyView()
-                // PreviewView(image: photo)
-            } else {
-                EmptyView()
-            }
+            photo = capturedPhoto
+            isShowingPreviewView = true
         }
     }
 }
