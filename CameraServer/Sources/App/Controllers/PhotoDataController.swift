@@ -6,38 +6,58 @@
 //
 
 import Vapor
+import Foundation
 
 final class PhotoDataController: RouteCollection {
+    private lazy var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+
     func boot(routes: RoutesBuilder) throws {
-        routes.post("upload-image", use: uploadImage)
+        routes.post(use: postEntity)
+
+        let singleUserRoutes = routes.grouped(":id")
+        singleUserRoutes.post("upload-image", use: uploadImage)
     }
 
     // MARK: Multipart
     private func uploadImage(req: Request) throws -> EventLoopFuture<Response> {
-        let userId = req.parameters.get("user_id", as: Int.self)
-        let timestamp = req.parameters.get("date", as: String.self)
+        let uuid = req.parameters.get("id", as: UUID.self)
         let file = try req.content.decode(File.self)
-        var fileName = "\(userId ?? -1)-\(timestamp ?? "")"
+        var fileName = "\(uuid?.uuidString ?? "").\(Date().timeIntervalSince1970)"
         fileName = file.extension.flatMap { "\(fileName).\($0)" } ?? fileName
         let path = req.application.directory.workingDirectory + fileName
 
         guard file.isImage else { throw Abort(.badRequest) }
 
-        return req
-            .fileio
-            .writeFile(file.data, at: path)
-            .map { _ -> EventLoopFuture<PhotoData> in
-                let photoData = PhotoData(
-                    userId: userId,
-                    date: timestamp,
-                    imageUrl: path
-                )
-
-                return photoData
-                    .save(on: req.db)
+        return PhotoData
+            .find(uuid, on: req.db)
+            .unwrap(orError: Abort(.notFound))
+            .flatMap { photoData in
+                req
+                    .fileio
+                    .writeFile(file.data, at: path)
                     .map { photoData }
             }
-            .encodeResponse(status: .accepted, for: req)
+            .flatMap { photoData in
+                let hostname = req.application.http.server.configuration.hostname
+                let port = req.application.http.server.configuration.port
+                photoData.imageUrl = "\(hostname):\(port)/\(path)"
+                return photoData
+                    .update(on: req.db)
+                    .map { photoData }
+                    .encodeResponse(status: .accepted, for: req)
+          }
+    }
+
+    // MARK: POST
+    private func postEntity(req: Request) throws -> EventLoopFuture<Response> {
+        let photoData = try req.content.decode(PhotoData.self, using: decoder)
+        return photoData.save(on: req.db)
+            .map { photoData }
+            .encodeResponse(status: .created, for: req)
     }
 }
 
@@ -48,7 +68,17 @@ extension File {
             "png",
             "jpeg",
             "jpg",
-            "gif"
+            "gif",
+            "hevc",
+            "heic",
+            "heif",
+            "heifs",
+            "heic",
+            "heics",
+            "avci",
+            "avcs",
+            "avif",
+            "avifs"
         ]
             .contains(self.extension?.lowercased())
     }

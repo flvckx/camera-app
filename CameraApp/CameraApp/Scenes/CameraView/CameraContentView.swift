@@ -11,7 +11,7 @@ struct CameraContentView: View {
     @EnvironmentObject private var viewModel: CameraView.ViewModel
 
     @State private var isShowingPreviewView = false
-    @State private var photo: PhotoData? = nil
+    @State private var photo: CapturedPhotoData? = nil
 
     var image: Image?
 
@@ -26,8 +26,8 @@ struct CameraContentView: View {
                         .scaledToFill()
                         .frame(
                             width: geometry.size.width,
-                            height: geometry.size.height,
-                            alignment: .center)
+                            height: geometry.size.height
+                        )
                         .clipped()
                 }
             } else {
@@ -49,9 +49,11 @@ struct CameraContentView: View {
                             .frame(width: 65, height: 65)
                             .foregroundColor(.red)
                     }
+                    .isDetailLink(false)
                     .disabled(true)
                     .padding(.bottom, 100)
                 }
+                .disabled(image == nil)
             }
         }
         .onChange(of: photo) { newValue in

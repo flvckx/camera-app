@@ -10,7 +10,7 @@ import SwiftUI
 struct PreviewView: View {
     @Environment(\.dismiss) var dismiss
 
-    @Binding var photoData: PhotoData?
+    @Binding var photoData: CapturedPhotoData?
 
     private let label = Text("Captured image")
 
@@ -23,8 +23,8 @@ struct PreviewView: View {
                     .scaledToFill()
                     .frame(
                         width: geometry.size.width,
-                        height: geometry.size.height,
-                        alignment: .center)
+                        height: geometry.size.height
+                    )
                     .clipped()
             }
 
@@ -44,14 +44,21 @@ struct PreviewView: View {
 
                     Spacer()
 
-                    Button {
-                        // todo upload
-                    } label: {
-                        Text("Continue")
-                            .frame(width: 100, height: 60)
-                            .border(.blue, width: 1)
+                    if let photoData = photoData {
+                        NavigationLink(
+                            destination: UploadView(
+                                viewModel: .init(capturedPhotoData: photoData)
+                            )
+                        )
+                        {
+                            Text("Continue")
+                                .frame(width: 100, height: 60)
+                                .foregroundColor(.blue)
+                                .border(.blue, width: 1)
+                        }
+                        .isDetailLink(false)
+                        .padding(.bottom, 100)
                     }
-                    .padding(.bottom, 100)
                 }
                 .padding([.leading, .trailing], 40)
             }
