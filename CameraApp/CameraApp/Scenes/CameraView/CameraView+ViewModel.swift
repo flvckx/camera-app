@@ -10,11 +10,15 @@ import SwiftUI
 extension CameraView {
     @MainActor class ViewModel: ObservableObject {
         @Published var previewImage: Image?
-        @Published var capturedPhoto: PhotoData?
+        @Published var capturedPhoto: CapturedPhotoData?
 
         var imageCaptureProvider = ImageCaptureProvider()
 
-        init() {
+        let userId: Int
+
+        init(userId: Int) {
+            self.userId = userId
+            
             Task {
                 await imageCaptureProvider.start()
             }
@@ -57,8 +61,9 @@ extension CameraView {
             let unpackedPhotoStream = imageCaptureProvider.photoStream
                 .compactMap { $0 }
 
-            for await photoData in unpackedPhotoStream {
+            for await var photoData in unpackedPhotoStream {
                 Task { @MainActor in
+                    photoData.userId = userId
                     previewImage = photoData.thumbnailImage
                     capturedPhoto = photoData
                 }

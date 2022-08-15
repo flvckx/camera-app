@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct FirstView: View {
+    @Environment(\.rootPresentationMode) var rootMode
+
     @FocusState private var userIdIsFocused: Bool
 
     @State private var userId = ""
-    @State private var isShowingCameraView = false
 
     var inputIsInvalid: Bool {
         return userId.isEmpty || Int(userId) == nil
@@ -33,12 +34,13 @@ struct FirstView: View {
 
                 Button {
                     userIdIsFocused = false
-                    isShowingCameraView = true
+                    rootMode.wrappedValue = true
                 } label: {
                     NavigationLink(
-                        destination: CameraView(),
-                        isActive: $isShowingCameraView
+                        destination: CameraView(viewModel: .init(userId: Int(userId)!)),
+                        isActive: rootMode
                     ) { Text("Enter") }
+                        .isDetailLink(false)
                         .frame(width: 250, height: 40)
                 }
                 .border(.black, width: 1)

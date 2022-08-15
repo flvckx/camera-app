@@ -30,7 +30,7 @@ final class ImageCaptureProvider: NSObject, ObservableObject {
         }
     }()
 
-    lazy var photoStream: AsyncStream<PhotoData?> = {
+    lazy var photoStream: AsyncStream<CapturedPhotoData?> = {
         AsyncStream { continuation in
             addToPhotoStream = { [weak self] photo in
                 guard let self = self else { return }
@@ -62,7 +62,7 @@ final class ImageCaptureProvider: NSObject, ObservableObject {
         cameraService.takePhoto()
     }
 
-    private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
+    private func unpackPhoto(_ photo: AVCapturePhoto) -> CapturedPhotoData? {
         guard
             let imageData = photo.fileDataRepresentation(),
             let previewCGImage = photo.previewCGImageRepresentation(),
@@ -77,7 +77,7 @@ final class ImageCaptureProvider: NSObject, ObservableObject {
         let previewDimensions = photo.resolvedSettings.previewDimensions
         let thumbnailSize = (width: Int(previewDimensions.width), height: Int(previewDimensions.height))
 
-        return PhotoData(
+        return CapturedPhotoData(
             thumbnailImage: thumbnailImage,
             thumbnailSize: thumbnailSize,
             imageData: imageData,

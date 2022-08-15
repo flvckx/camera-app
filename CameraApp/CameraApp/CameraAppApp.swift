@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct CameraAppApp: App {
+    @State private var isActive : Bool = false
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 FirstView()
             }
+            .environment(\.rootPresentationMode, $isActive)
         }
     }
 }

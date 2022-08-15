@@ -12,6 +12,9 @@ struct CreatePhotoDataMigration: Migration {
         database
             .schema(PhotoData.schema)
             .id()
+            .field("user_id", .int, .required)
+            .field("image_url", .string)
+            .field("timestamp", .string, .required)
             .create()
     }
 

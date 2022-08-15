@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CameraView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var viewModel = ViewModel()
+    @StateObject var viewModel: ViewModel
 
     var body: some View {
         CameraContentView(image: viewModel.previewImage)
@@ -22,6 +22,6 @@ struct CameraView: View {
 
 struct CameraView_Previews: PreviewProvider {
     static var previews: some View {
-        CameraView()
+        CameraView(viewModel: .init(userId: 1))
     }
 }

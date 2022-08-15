@@ -21,7 +21,17 @@
 		C6FE719B28A7BC8000F349E5 /* ImageCaptureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE719A28A7BC8000F349E5 /* ImageCaptureProvider.swift */; };
 		C6FE719E28A7CCF000F349E5 /* CIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE719D28A7CCF000F349E5 /* CIImage+.swift */; };
 		C6FE71A128A800E900F349E5 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71A028A800E900F349E5 /* PreviewView.swift */; };
-		C6FE71A428A8059C00F349E5 /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71A328A8059C00F349E5 /* PhotoData.swift */; };
+		C6FE71A428A8059C00F349E5 /* CapturedPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71A328A8059C00F349E5 /* CapturedPhotoData.swift */; };
+		C6FE71A728A8CDF600F349E5 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71A628A8CDF600F349E5 /* UploadView.swift */; };
+		C6FE71AA28A90AD900F349E5 /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71A928A90AD900F349E5 /* FileUploader.swift */; };
+		C6FE71AC28A918E500F349E5 /* UploadPhotoParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71AB28A918E500F349E5 /* UploadPhotoParameters.swift */; };
+		C6FE71AE28A9229E00F349E5 /* UploadView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71AD28A9229E00F349E5 /* UploadView+ViewModel.swift */; };
+		C6FE71B128A925D600F349E5 /* DateFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71B028A925D600F349E5 /* DateFormatterService.swift */; };
+		C6FE71B428A9486A00F349E5 /* PhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71B328A9486A00F349E5 /* PhotoData.swift */; };
+		C6FE71B728A954C200F349E5 /* PhotoGalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71B628A954C200F349E5 /* PhotoGalleryService.swift */; };
+		C6FE71B928AA805500F349E5 /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71B828AA805500F349E5 /* EnvironmentValues+.swift */; };
+		C6FE71BC28AA80E600F349E5 /* RootPresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71BB28AA80E600F349E5 /* RootPresentationMode.swift */; };
+		C6FE71BE28AAA80400F349E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FE71BD28AAA80300F349E5 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +50,18 @@
 		C6FE719A28A7BC8000F349E5 /* ImageCaptureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureProvider.swift; sourceTree = "<group>"; };
 		C6FE719D28A7CCF000F349E5 /* CIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+.swift"; sourceTree = "<group>"; };
 		C6FE71A028A800E900F349E5 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
-		C6FE71A328A8059C00F349E5 /* PhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
+		C6FE71A328A8059C00F349E5 /* CapturedPhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedPhotoData.swift; sourceTree = "<group>"; };
+		C6FE71A628A8CDF600F349E5 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
+		C6FE71A928A90AD900F349E5 /* FileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploader.swift; sourceTree = "<group>"; };
+		C6FE71AB28A918E500F349E5 /* UploadPhotoParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoParameters.swift; sourceTree = "<group>"; };
+		C6FE71AD28A9229E00F349E5 /* UploadView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadView+ViewModel.swift"; sourceTree = "<group>"; };
+		C6FE71B028A925D600F349E5 /* DateFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterService.swift; sourceTree = "<group>"; };
+		C6FE71B228A92DF100F349E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C6FE71B328A9486A00F349E5 /* PhotoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoData.swift; sourceTree = "<group>"; };
+		C6FE71B628A954C200F349E5 /* PhotoGalleryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGalleryService.swift; sourceTree = "<group>"; };
+		C6FE71B828AA805500F349E5 /* EnvironmentValues+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
+		C6FE71BB28AA80E600F349E5 /* RootPresentationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPresentationMode.swift; sourceTree = "<group>"; };
+		C6FE71BD28AAA80300F349E5 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +94,11 @@
 		C6FE716D28A7924B00F349E5 /* CameraApp */ = {
 			isa = PBXGroup;
 			children = (
+				C6FE71B228A92DF100F349E5 /* Info.plist */,
 				C6FE716E28A7924B00F349E5 /* CameraAppApp.swift */,
 				C6FE719628A7BBC300F349E5 /* Extensions */,
 				C6FE718428A7A9F000F349E5 /* Models */,
+				C6FE71A828A90ACA00F349E5 /* Network */,
 				C6FE717D28A794AD00F349E5 /* Scenes */,
 				C6FE717C28A7947A00F349E5 /* Resources */,
 			);
@@ -105,6 +128,7 @@
 				C6FE718D28A7BA3900F349E5 /* CameraView */,
 				C6FE717E28A7957100F349E5 /* FirstView */,
 				C6FE719F28A800CB00F349E5 /* PreviewView */,
+				C6FE71A528A8CDE100F349E5 /* UploadView */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -120,6 +144,7 @@
 		C6FE718428A7A9F000F349E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C6FE71BA28AA80C400F349E5 /* EnvironmentKeys */,
 				C6FE71A228A8058800F349E5 /* Entitites */,
 				C6FE719C28A7BDB100F349E5 /* Providers */,
 				C6FE718528A7A9F900F349E5 /* Services */,
@@ -130,6 +155,8 @@
 		C6FE718528A7A9F900F349E5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C6FE71B528A954AD00F349E5 /* PhotoGalleryService */,
+				C6FE71AF28A925C900F349E5 /* DateFormatterService */,
 				C6FE718828A7AEBD00F349E5 /* CameraService */,
 			);
 			path = Services;
@@ -160,6 +187,7 @@
 			children = (
 				C6FE719D28A7CCF000F349E5 /* CIImage+.swift */,
 				C6FE719728A7BBD000F349E5 /* View+.swift */,
+				C6FE71B828AA805500F349E5 /* EnvironmentValues+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -191,9 +219,53 @@
 		C6FE71A228A8058800F349E5 /* Entitites */ = {
 			isa = PBXGroup;
 			children = (
-				C6FE71A328A8059C00F349E5 /* PhotoData.swift */,
+				C6FE71A328A8059C00F349E5 /* CapturedPhotoData.swift */,
+				C6FE71AB28A918E500F349E5 /* UploadPhotoParameters.swift */,
+				C6FE71B328A9486A00F349E5 /* PhotoData.swift */,
 			);
 			path = Entitites;
+			sourceTree = "<group>";
+		};
+		C6FE71A528A8CDE100F349E5 /* UploadView */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE71A628A8CDF600F349E5 /* UploadView.swift */,
+				C6FE71AD28A9229E00F349E5 /* UploadView+ViewModel.swift */,
+			);
+			path = UploadView;
+			sourceTree = "<group>";
+		};
+		C6FE71A828A90ACA00F349E5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE71A928A90AD900F349E5 /* FileUploader.swift */,
+				C6FE71BD28AAA80300F349E5 /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C6FE71AF28A925C900F349E5 /* DateFormatterService */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE71B028A925D600F349E5 /* DateFormatterService.swift */,
+			);
+			path = DateFormatterService;
+			sourceTree = "<group>";
+		};
+		C6FE71B528A954AD00F349E5 /* PhotoGalleryService */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE71B628A954C200F349E5 /* PhotoGalleryService.swift */,
+			);
+			path = PhotoGalleryService;
+			sourceTree = "<group>";
+		};
+		C6FE71BA28AA80C400F349E5 /* EnvironmentKeys */ = {
+			isa = PBXGroup;
+			children = (
+				C6FE71BB28AA80E600F349E5 /* RootPresentationMode.swift */,
+			);
+			path = EnvironmentKeys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,17 +340,27 @@
 			files = (
 				C6FE719528A7BAD800F349E5 /* CameraView+ViewModel.swift in Sources */,
 				C6FE719E28A7CCF000F349E5 /* CIImage+.swift in Sources */,
+				C6FE71BE28AAA80400F349E5 /* NetworkError.swift in Sources */,
+				C6FE71B928AA805500F349E5 /* EnvironmentValues+.swift in Sources */,
+				C6FE71AA28A90AD900F349E5 /* FileUploader.swift in Sources */,
 				C6FE719328A7BA7600F349E5 /* CameraContentView.swift in Sources */,
 				C6FE718C28A7B99300F349E5 /* CameraServiceProtocol.swift in Sources */,
+				C6FE71AE28A9229E00F349E5 /* UploadView+ViewModel.swift in Sources */,
+				C6FE71B428A9486A00F349E5 /* PhotoData.swift in Sources */,
 				C6FE718028A795B100F349E5 /* FirstView.swift in Sources */,
 				C6FE71A128A800E900F349E5 /* PreviewView.swift in Sources */,
+				C6FE71BC28AA80E600F349E5 /* RootPresentationMode.swift in Sources */,
+				C6FE71B128A925D600F349E5 /* DateFormatterService.swift in Sources */,
 				C6FE719828A7BBD000F349E5 /* View+.swift in Sources */,
 				C6FE716F28A7924B00F349E5 /* CameraAppApp.swift in Sources */,
+				C6FE71AC28A918E500F349E5 /* UploadPhotoParameters.swift in Sources */,
 				C6FE719B28A7BC8000F349E5 /* ImageCaptureProvider.swift in Sources */,
 				C6FE719128A7BA5300F349E5 /* CameraView.swift in Sources */,
 				C6FE718728A7AA1900F349E5 /* CameraService.swift in Sources */,
+				C6FE71A728A8CDF600F349E5 /* UploadView.swift in Sources */,
 				C6FE718A28A7AED000F349E5 /* CameraServiceError.swift in Sources */,
-				C6FE71A428A8059C00F349E5 /* PhotoData.swift in Sources */,
+				C6FE71A428A8059C00F349E5 /* CapturedPhotoData.swift in Sources */,
+				C6FE71B728A954C200F349E5 /* PhotoGalleryService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +492,9 @@
 				DEVELOPMENT_TEAM = TF2QHL8V3B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CameraApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "CameraApp uses front camera to capture images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CameraApp stores your selfies to your gallery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,7 +524,9 @@
 				DEVELOPMENT_TEAM = TF2QHL8V3B;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CameraApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "CameraApp uses front camera to capture images.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CameraApp stores your selfies to your gallery.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
